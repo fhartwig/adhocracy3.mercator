@@ -368,7 +368,21 @@ def browser_root(browsera, server) -> Browser:
 @fixture()
 def browser_test(browsera, server_static) -> Browser:
     """Return test browser instance with url=test.html."""
-    url = server_static.application_url + 'frontend_static/test.html'
+    return browser_test_helper(
+        browsera, server_static,
+        server_static.application_url + 'frontend_static/test.html')
+
+
+@fixture()
+def browser_igtest(browsera, server_static) -> Browser:
+    """Return test browser instance with url=test.html."""
+    return browser_test_helper(
+        browsera, server_static,
+        server_static.application_url + 'frontend_static/igtest.html')
+
+
+def browser_test_helper(browsera, server_static, url) -> Browser:
+    """Return test browser instance with url of choice."""
     browsera.visit(url)
 
     def jasmine_finished(browser):
