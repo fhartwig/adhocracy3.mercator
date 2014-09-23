@@ -3,9 +3,9 @@
 
 import modernizr = require("modernizr");
 import Config = require("../Config/Config");
-import WebSocket = require("../WebSocket/WebSocket");
+import WebSocket = require("./WebSocket");
 
-export var register = (angular, config, meta_api) => {
+export var register = (angular, config : Config.Type, meta_api) => {
 
     describe("WebSocket", () => {
         var ws : WebSocket.IService;
