@@ -1,14 +1,9 @@
 /// <reference path="../../../lib/DefinitelyTyped/jasmine/jasmine.d.ts"/>
 
 import Config = require("../Config/Config");
-import WebSocket = require("../WebSocket/WebSocket");
+import WebSocket = require("./WebSocket");
 
 export var register = () => {
-    // FIXME: This should be ``describe("WebSocket")`` and should be wrapped in a
-    // ``describe("Services")`` to mirror the module structure. This is not
-    // currently possible because the script that generates AdhocracySpec.ts
-    // includes all *Spec.ts modules.
-
     describe("WebSocket", () => {
         var config: Config.Type = {
             pkg_path: "mock",
