@@ -41,6 +41,14 @@ export interface IService {
      * Roughly equivalent to $.off() (see comment above).
      */
     unregister : (path : string, id : string) => void;
+
+    /**
+     * Register error handlers.  If callback is not given, delete old
+     * error handler.  Independently of whether an error handler is
+     * registered or not, backend error messages will trigger an
+     * asynchronous exception.
+     */
+    registerErrorHandler : (callback ?: (ResponseError) => void) => void;
 }
 
 /**
@@ -302,6 +310,7 @@ export var factoryIService = (
 
     var register : (path : string, callback : (event : IServerEvent) => void) => string;
     var unregister : (path : string, id : string) => void;
+    var registerErrorHandler : (callback ?: (ResponseError) => void) => void;
     var sendRequest : (req : Request) => void;
     var handleResponseMessage : (msg : ServerMessage) => void;
 
@@ -309,6 +318,8 @@ export var factoryIService = (
     var onerror : (event : any) => void;
     var onopen : (event : any) => void;
     var onclose : (event : any) => void;
+
+    var errorHandler : (msg : ResponseError) => void;
 
     var open : () => any;
 
@@ -354,6 +365,19 @@ export var factoryIService = (
                 // server is expected to have forgotten anyway.
             });
             _pendingSubscriptions.del(path, id);
+        }
+    };
+
+    /**
+     * (see interface for documentation)
+     */
+    registerErrorHandler = (
+        callback ?: (ResponseError) => void
+    ) : void => {
+        if (typeof callback === "undefined") {
+            delete errorHandler;
+        } else {
+            errorHandler = callback;
         }
     };
 
@@ -414,6 +438,10 @@ export var factoryIService = (
 
         // ResponseError: request failed!
         if (msg.hasOwnProperty("error")) {
+            if (typeof errorHandler !== "undefined") {
+                errorHandler(msg);
+            }
+
             switch (msg.error) {
             case "unknown_action":
             case "unknown_resource":
@@ -503,7 +531,8 @@ export var factoryIService = (
 
     return {
         register: register,
-        unregister: unregister
+        unregister: unregister,
+        registerErrorHandler: registerErrorHandler
     };
 };
 

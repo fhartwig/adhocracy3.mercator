@@ -15,11 +15,14 @@ export var register = (angular, config : Config.Type, meta_api) => {
         });
 
         it("handles basic subscription to /adhocracy nicely.", (done) => {
+            ws.registerErrorHandler((msg) => {
+                expect(JSON.stringify(msg, null, 2)).toEqual(false);
+                done();
+            });
+
             ws.register("/adhocracy", (event) => {
                 done();
             });
-            // this test will throw an async exception and time out if
-            // an error response is sent from backend.
         });
     });
 };
