@@ -374,11 +374,7 @@ export var factoryIService = (
     registerErrorHandler = (
         callback ?: (ResponseError) => void
     ) : void => {
-        if (typeof callback === "undefined") {
-            delete errorHandler;
-        } else {
-            errorHandler = callback;
-        }
+        errorHandler = callback;
     };
 
     /**
