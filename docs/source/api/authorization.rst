@@ -53,9 +53,10 @@ Principal: UserId | group:GroupID | role:RoleID
 Permission: view, edit, add, ...
 
 Every resource in the object hierarchy has a local ACL.
-A resource aggregates all acls of his parents.
-To check permission all aces are searched starting with the local ones.
-The Action of the first ace with matching permission is returned.
+
+To check permission all ACEs are searched starting with the ACL of the
+requested resource, and then searching the parent's ACLs recursively.
+The Action of the first ACE with matching permission is returned.
 
 
 Customizing
