@@ -83,6 +83,8 @@ concept, and roles are something we want to build on top?
 is there multiple inheritance?  if yes, which parent's ACL is searched
 first?
 
+can groups be members of groups?
+
 draw a graph with all mappings, and mark them as
  - 1:n vs. n:1 vs. n:m
  - dynamic (workflows) vs. static (config files)
