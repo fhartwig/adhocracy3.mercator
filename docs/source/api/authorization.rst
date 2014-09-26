@@ -5,8 +5,8 @@ Principals (global/local mapping to Roles):
 ...........................................
 
 - groups
-   - Authenticated (all authenticated user, pyramid internal name)
-   - Everyone (all authenticated and anonymous user, pyramid internal name)
+   - Authenticated (all authenticated users, pyramid internal name)
+   - Everyone (all authenticated and anonymous users, pyramid internal name)
    - managers (custom group)
    - admins (custom group)
    - gods (custom group, no permssion checks)
@@ -15,6 +15,7 @@ Principals (global/local mapping to Roles):
 - users
    - god
    ...
+
 
 Roles (global mapping to permissions):
 ......................................
@@ -41,10 +42,11 @@ Roles (global mapping to permissions):
     - creator: principal who created the local context:
         ....
 
+
 ACL (Access Control List):
 ...........................
 
-List with aces (Access Control Entry): [<Action>, <Principal>, <Permission>]
+List with ACEs (Access Control Entry): [<Action>, <Principal>, <Permission>]
 
 Action: Allow | Deny
 Principal: UserId | group:GroupID | role:RoleID
@@ -56,8 +58,8 @@ To check permission all aces are searched starting with the local ones.
 The Action of the first ace with matching permission is returned.
 
 
-Customizing:
-............
+Customizing
+...........
 
 1. map users to group
 2. map roles to group/(user)
