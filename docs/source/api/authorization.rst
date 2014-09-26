@@ -92,3 +92,22 @@ draw a graph with all mappings, and mark them as
 identify minimal subset that
  - satisfies requirements for merkator.
  - can be implemented efficiently, and the rest can be added efficiently later.
+in particular: do we need workflows at all?  or can we assume ACLs and roles don't change at run time?
+
+
+API
+---
+
+an operation is a tuple (user, resource, permission).  example::
+
+    ( joe,
+      /adhocracy/proposals/against_curtains/version_000043,
+      edit )
+
+fe wants to
+ - ask if an operation is allowed (so it can render an object as non-editable, for instance).
+ - try an operation, and get a "denied" error that it can handle gracefully.
+
+mappings from users, groups, roles to each other must be contained in
+resources.  (and only visible to authorized users!)  (it is a security
+requirement that these resources are in sync with the backend!)
