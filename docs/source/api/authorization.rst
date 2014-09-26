@@ -71,3 +71,22 @@ Customizing
 5. map permissions to roles:
         - use only configuration for this
         - default mapping should just work for most use cases)
+
+
+FIXME: Open questions
+---------------------
+
+what is the difference between role and group, on a conceptual level?
+(why do we need both?)  i'm assuming that groups are a pyramid
+concept, and roles are something we want to build on top?
+
+is there multiple inheritance?  if yes, which parent's ACL is searched
+first?
+
+draw a graph with all mappings, and mark them as
+ - 1:n vs. n:1 vs. n:m
+ - dynamic (workflows) vs. static (config files)
+
+identify minimal subset that
+ - satisfies requirements for merkator.
+ - can be implemented efficiently, and the rest can be added efficiently later.
