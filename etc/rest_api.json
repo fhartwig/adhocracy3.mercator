@@ -222,11 +222,89 @@
         },
         {
           "editable": true,
+          "valuetype": "adhocracy.schema.Reference",
+          "containertype": "list",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "groups"
+        },
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.Reference",
+          "containertype": "list",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "roles"
+        },
+        {
+          "editable": true,
           "valuetype": "adhocracy.schema.TimeZoneName",
           "creatable": true,
           "readable": true,
           "create_mandatory": false,
           "name": "tzname"
+        }
+      ]
+    },
+    "adhocracy.sheets.user.IGroupBasic": {
+      "fields": [
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.SingleLine",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "name"
+        },
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.Reference",
+          "containertype": "list",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "users"
+        },
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.Reference",
+          "containertype": "list",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "roles"
+        }
+      ]
+    },
+    "adhocracy.sheets.user.IRoleBasic": {
+      "fields": [
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.SingleLine",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "name"
+        },
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.Reference",
+          "containertype": "list",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "users"
+        },
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.Reference",
+          "containertype": "list",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "groups"
         }
       ]
     },
@@ -451,6 +529,24 @@
         "adhocracy.resources.principal.IUser"
       ]
     },
+    "adhocracy.resources.principal.IGroupsService": {
+      "sheets": [
+        "adhocracy.sheets.pool.IPool",
+        "adhocracy.sheets.metadata.IMetadata"
+      ],
+      "element_types": [
+        "adhocracy.resources.principal.IGroup"
+      ]
+    },
+    "adhocracy.resources.principal.IRolesService": {
+      "sheets": [
+        "adhocracy.sheets.pool.IPool",
+        "adhocracy.sheets.metadata.IMetadata"
+      ],
+      "element_types": [
+        "adhocracy.resources.principal.IRole"
+      ]
+    },
     "adhocracy_sample.resources.paragraph.IParagraph": {
       "item_type": "adhocracy_sample.resources.paragraph.IParagraphVersion",
       "sheets": [
@@ -525,6 +621,20 @@
         "adhocracy.sheets.pool.IPool",
         "adhocracy.sheets.user.IPasswordAuthentication",
         "adhocracy.sheets.rate.ICanRate"
+      ]
+    },
+    "adhocracy.resources.principal.IGroup": {
+      "sheets": [
+        "adhocracy.sheets.user.IGroupBasic",
+        "adhocracy.sheets.metadata.IMetadata",
+        "adhocracy.sheets.pool.IPool"
+      ]
+    },
+    "adhocracy.resources.principal.IRole": {
+      "sheets": [
+        "adhocracy.sheets.user.IRoleBasic",
+        "adhocracy.sheets.metadata.IMetadata",
+        "adhocracy.sheets.pool.IPool"
       ]
     },
     "adhocracy.resources.principal.IPrincipalsService": {
