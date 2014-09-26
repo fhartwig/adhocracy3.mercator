@@ -1,0 +1,537 @@
+{
+  "sheets": {
+    "adhocracy_sample.sheets.comment.ICommentable": {
+      "fields": [
+        {
+          "editable": false,
+          "valuetype": "adhocracy.schema.AbsolutePath",
+          "containertype": "list",
+          "creatable": false,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "comments",
+          "targetsheet": "adhocracy_sample.sheets.comment.IComment"
+        },
+        {
+          "editable": false,
+          "valuetype": "adhocracy.schema.PostPool",
+          "creatable": false,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "post_pool",
+          "targetsheet": "adhocracy.interfaces.ISheet"
+        }
+      ]
+    },
+    "adhocracy.sheets.user.IPasswordAuthentication": {
+      "fields": [
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.Password",
+          "creatable": true,
+          "readable": false,
+          "create_mandatory": false,
+          "name": "password"
+        }
+      ]
+    },
+    "adhocracy.sheets.versions.IForkableVersionable": {
+      "fields": [
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.AbsolutePath",
+          "containertype": "list",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "follows",
+          "targetsheet": "adhocracy.sheets.versions.IVersionable"
+        },
+        {
+          "editable": false,
+          "valuetype": "adhocracy.schema.AbsolutePath",
+          "containertype": "list",
+          "creatable": false,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "followed_by",
+          "targetsheet": "adhocracy.sheets.versions.IVersionable"
+        }
+      ]
+    },
+    "adhocracy.sheets.document.ISection": {
+      "fields": [
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.SingleLine",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "title"
+        },
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.AbsolutePath",
+          "containertype": "list",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "elements",
+          "targetsheet": "adhocracy.sheets.document.IParagraph"
+        },
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.AbsolutePath",
+          "containertype": "list",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "subsections",
+          "targetsheet": "adhocracy.sheets.document.ISection"
+        }
+      ]
+    },
+    "adhocracy.sheets.versions.IVersions": {
+      "fields": [
+        {
+          "editable": false,
+          "valuetype": "adhocracy.schema.AbsolutePath",
+          "containertype": "list",
+          "creatable": false,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "elements",
+          "targetsheet": "adhocracy.sheets.versions.IVersionable"
+        }
+      ]
+    },
+    "adhocracy_sample.sheets.comment.IComment": {
+      "fields": [
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.Reference",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "refers_to",
+          "targetsheet": "adhocracy_sample.sheets.comment.ICommentable"
+        },
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.Text",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "content"
+        }
+      ]
+    },
+    "adhocracy.sheets.metadata.IMetadata": {
+      "fields": [
+        {
+          "editable": false,
+          "valuetype": "adhocracy.schema.Reference",
+          "creatable": false,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "creator",
+          "targetsheet": "adhocracy.sheets.user.IUserBasic"
+        },
+        {
+          "editable": false,
+          "valuetype": "adhocracy.schema.DateTime",
+          "creatable": false,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "creation_date"
+        },
+        {
+          "editable": false,
+          "valuetype": "adhocracy.schema.DateTime",
+          "creatable": false,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "item_creation_date"
+        },
+        {
+          "editable": false,
+          "valuetype": "adhocracy.schema.DateTime",
+          "creatable": false,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "modification_date"
+        }
+      ]
+    },
+    "adhocracy.sheets.rate.ICanRate": {
+      "fields": []
+    },
+    "adhocracy.sheets.versions.IVersionable": {
+      "fields": [
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.AbsolutePath",
+          "containertype": "list",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "follows",
+          "targetsheet": "adhocracy.sheets.versions.IVersionable"
+        },
+        {
+          "editable": false,
+          "valuetype": "adhocracy.schema.AbsolutePath",
+          "containertype": "list",
+          "creatable": false,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "followed_by",
+          "targetsheet": "adhocracy.sheets.versions.IVersionable"
+        }
+      ]
+    },
+    "adhocracy.sheets.name.IName": {
+      "fields": [
+        {
+          "editable": false,
+          "valuetype": "adhocracy.schema.Name",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": true,
+          "name": "name"
+        }
+      ]
+    },
+    "adhocracy.sheets.user.IUserBasic": {
+      "fields": [
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.Email",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "email"
+        },
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.SingleLine",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "name"
+        },
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.TimeZoneName",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "tzname"
+        }
+      ]
+    },
+    "adhocracy.sheets.rate.IRate": {
+      "fields": [
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.Reference",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": true,
+          "name": "subject",
+          "targetsheet": "adhocracy.sheets.rate.ICanRate"
+        },
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.Reference",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": true,
+          "name": "object",
+          "targetsheet": "adhocracy.sheets.rate.IRateable"
+        },
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.Rate",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": true,
+          "name": "rate"
+        }
+      ]
+    },
+    "adhocracy.sheets.tags.ITag": {
+      "fields": [
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.AbsolutePath",
+          "containertype": "list",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "elements",
+          "targetsheet": "adhocracy.sheets.versions.IVersionable"
+        }
+      ]
+    },
+    "adhocracy.sheets.rate.IRateable": {
+      "fields": [
+        {
+          "editable": false,
+          "valuetype": "adhocracy.schema.PostPool",
+          "creatable": false,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "post_pool",
+          "targetsheet": "adhocracy.interfaces.ISheet"
+        }
+      ]
+    },
+    "adhocracy.sheets.pool.IPool": {
+      "fields": [
+        {
+          "editable": false,
+          "valuetype": "adhocracy.schema.AbsolutePath",
+          "containertype": "list",
+          "creatable": false,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "elements",
+          "targetsheet": "adhocracy.interfaces.ISheet"
+        }
+      ]
+    },
+    "adhocracy.sheets.tags.ITags": {
+      "fields": [
+        {
+          "editable": false,
+          "valuetype": "adhocracy.schema.AbsolutePath",
+          "containertype": "list",
+          "creatable": false,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "elements",
+          "targetsheet": "adhocracy.sheets.tags.ITag"
+        }
+      ]
+    },
+    "adhocracy.sheets.document.IParagraph": {
+      "fields": [
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.Text",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "content"
+        }
+      ]
+    },
+    "adhocracy.sheets.document.IDocument": {
+      "fields": [
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.SingleLine",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "title"
+        },
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.Text",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "description"
+        },
+        {
+          "editable": true,
+          "valuetype": "adhocracy.schema.AbsolutePath",
+          "containertype": "list",
+          "creatable": true,
+          "readable": true,
+          "create_mandatory": false,
+          "name": "elements",
+          "targetsheet": "adhocracy.sheets.document.ISection"
+        }
+      ]
+    }
+  },
+  "resources": {
+    "adhocracy.resources.rate.IRateVersion": {
+      "sheets": [
+        "adhocracy.sheets.versions.IVersionable",
+        "adhocracy.sheets.metadata.IMetadata",
+        "adhocracy.sheets.rate.IRate"
+      ]
+    },
+    "adhocracy.resources.rate.IRate": {
+      "item_type": "adhocracy.resources.rate.IRateVersion",
+      "sheets": [
+        "adhocracy.sheets.name.IName",
+        "adhocracy.sheets.tags.ITags",
+        "adhocracy.sheets.versions.IVersions",
+        "adhocracy.sheets.pool.IPool",
+        "adhocracy.sheets.metadata.IMetadata"
+      ],
+      "element_types": [
+        "adhocracy.resources.rate.IRateVersion"
+      ]
+    },
+    "adhocracy_sample.resources.comment.ICommentVersion": {
+      "sheets": [
+        "adhocracy.sheets.versions.IVersionable",
+        "adhocracy.sheets.metadata.IMetadata",
+        "adhocracy_sample.sheets.comment.IComment",
+        "adhocracy_sample.sheets.comment.ICommentable",
+        "adhocracy.sheets.rate.IRateable"
+      ]
+    },
+    "adhocracy.resources.pool.IBasicPool": {
+      "sheets": [
+        "adhocracy.sheets.name.IName",
+        "adhocracy.sheets.pool.IPool",
+        "adhocracy.sheets.metadata.IMetadata"
+      ],
+      "element_types": [
+        "adhocracy.interfaces.IPool"
+      ]
+    },
+    "adhocracy.resources.root.IRootPool": {
+      "sheets": [
+        "adhocracy.sheets.name.IName",
+        "adhocracy.sheets.pool.IPool",
+        "adhocracy.sheets.metadata.IMetadata"
+      ],
+      "element_types": [
+        "adhocracy.interfaces.IPool"
+      ]
+    },
+    "adhocracy.resources.principal.IPasswordResetsService": {
+      "sheets": [
+        "adhocracy.sheets.pool.IPool",
+        "adhocracy.sheets.metadata.IMetadata"
+      ]
+    },
+    "adhocracy_sample.resources.section.ISection": {
+      "item_type": "adhocracy_sample.resources.section.ISectionVersion",
+      "sheets": [
+        "adhocracy.sheets.name.IName",
+        "adhocracy.sheets.tags.ITags",
+        "adhocracy.sheets.versions.IVersions",
+        "adhocracy.sheets.pool.IPool",
+        "adhocracy.sheets.metadata.IMetadata"
+      ],
+      "element_types": [
+        "adhocracy.interfaces.ITag",
+        "adhocracy_sample.resources.section.ISectionVersion"
+      ]
+    },
+    "adhocracy.resources.principal.IGroupsService": {
+      "sheets": [
+        "adhocracy.sheets.pool.IPool",
+        "adhocracy.sheets.metadata.IMetadata"
+      ]
+    },
+    "adhocracy_sample.resources.proposal.IProposalVersion": {
+      "sheets": [
+        "adhocracy.sheets.versions.IVersionable",
+        "adhocracy.sheets.metadata.IMetadata",
+        "adhocracy.sheets.document.IDocument",
+        "adhocracy_sample.sheets.comment.ICommentable"
+      ]
+    },
+    "adhocracy.resources.principal.IUsersService": {
+      "sheets": [
+        "adhocracy.sheets.pool.IPool",
+        "adhocracy.sheets.metadata.IMetadata"
+      ],
+      "element_types": [
+        "adhocracy.resources.principal.IUser"
+      ]
+    },
+    "adhocracy_sample.resources.paragraph.IParagraph": {
+      "item_type": "adhocracy_sample.resources.paragraph.IParagraphVersion",
+      "sheets": [
+        "adhocracy.sheets.name.IName",
+        "adhocracy.sheets.tags.ITags",
+        "adhocracy.sheets.versions.IVersions",
+        "adhocracy.sheets.pool.IPool",
+        "adhocracy.sheets.metadata.IMetadata"
+      ],
+      "element_types": [
+        "adhocracy.interfaces.ITag",
+        "adhocracy_sample.resources.paragraph.IParagraphVersion"
+      ]
+    },
+    "adhocracy_sample.resources.comment.IComment": {
+      "item_type": "adhocracy_sample.resources.comment.ICommentVersion",
+      "sheets": [
+        "adhocracy.sheets.name.IName",
+        "adhocracy.sheets.tags.ITags",
+        "adhocracy.sheets.versions.IVersions",
+        "adhocracy.sheets.pool.IPool",
+        "adhocracy.sheets.metadata.IMetadata"
+      ],
+      "element_types": [
+        "adhocracy_sample.resources.comment.IComment",
+        "adhocracy_sample.resources.comment.ICommentVersion",
+        "adhocracy.resources.rate.IRate"
+      ]
+    },
+    "adhocracy_sample.resources.section.ISectionVersion": {
+      "sheets": [
+        "adhocracy.sheets.versions.IVersionable",
+        "adhocracy.sheets.metadata.IMetadata",
+        "adhocracy.sheets.document.ISection"
+      ]
+    },
+    "adhocracy.interfaces.ITag": {
+      "sheets": [
+        "adhocracy.sheets.name.IName",
+        "adhocracy.sheets.metadata.IMetadata",
+        "adhocracy.sheets.tags.ITag"
+      ]
+    },
+    "adhocracy_sample.resources.proposal.IProposal": {
+      "item_type": "adhocracy_sample.resources.proposal.IProposalVersion",
+      "sheets": [
+        "adhocracy.sheets.name.IName",
+        "adhocracy.sheets.tags.ITags",
+        "adhocracy.sheets.versions.IVersions",
+        "adhocracy.sheets.pool.IPool",
+        "adhocracy.sheets.metadata.IMetadata"
+      ],
+      "element_types": [
+        "adhocracy.interfaces.ITag",
+        "adhocracy_sample.resources.section.ISection",
+        "adhocracy_sample.resources.paragraph.IParagraph",
+        "adhocracy_sample.resources.comment.IComment",
+        "adhocracy_sample.resources.proposal.IProposalVersion"
+      ]
+    },
+    "adhocracy_sample.resources.paragraph.IParagraphVersion": {
+      "sheets": [
+        "adhocracy.sheets.versions.IVersionable",
+        "adhocracy.sheets.metadata.IMetadata",
+        "adhocracy.sheets.document.IParagraph"
+      ]
+    },
+    "adhocracy.resources.principal.IUser": {
+      "sheets": [
+        "adhocracy.sheets.user.IUserBasic",
+        "adhocracy.sheets.metadata.IMetadata",
+        "adhocracy.sheets.pool.IPool",
+        "adhocracy.sheets.user.IPasswordAuthentication",
+        "adhocracy.sheets.rate.ICanRate"
+      ]
+    },
+    "adhocracy.resources.principal.IPrincipalsService": {
+      "sheets": [
+        "adhocracy.sheets.pool.IPool",
+        "adhocracy.sheets.metadata.IMetadata"
+      ]
+    }
+  }
+}
