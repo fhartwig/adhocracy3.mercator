@@ -81,9 +81,9 @@ what is the difference between role and group, on a conceptual level?
 concept, and roles are something we want to build on top?
 
 is there multiple inheritance?  if yes, which parent's ACL is searched
-first?
+first?  -- no mulitple inheritance.  good.
 
-can groups be members of groups?
+can groups be members of groups?  -- no.  but it would be easy to implement that.
 
 draw a graph with all mappings, and mark them as
  - 1:n vs. n:1 vs. n:m
@@ -111,3 +111,23 @@ fe wants to
 mappings from users, groups, roles to each other must be contained in
 resources.  (and only visible to authorized users!)  (it is a security
 requirement that these resources are in sync with the backend!)
+
+
+notes from meeting with joka
+----------------------------
+
+If FE wants to ask BE about permissions, there are many ways to
+implement this:
+
+ - OPTIONS protocol (already implemented, and expressive enough to
+   decide if we can eit a resource or not)
+
+this is what we want to do for merkator.  future alternatives:
+
+ - add permission object to meta api (CAVEAT: this makes version
+   resources change unexpectedly).
+
+ - change HTTP response to contain not only the resource but also
+   permission information in a larger json object.
+
+ - new http endpoint for permission requests.
