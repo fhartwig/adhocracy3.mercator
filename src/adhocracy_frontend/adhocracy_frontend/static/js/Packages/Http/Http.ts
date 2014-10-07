@@ -114,7 +114,7 @@ export class Service<Content extends Resources.Content<any>> {
         }
         path = this.formatUrl(path);
         return this.$http
-            .put(path, AdhConvert.exportContent(this.adhMetaApi, obj));
+            .put(path, obj);
     }
 
     public put(path : string, obj : Content) : ng.IPromise<Content> {
@@ -132,7 +132,7 @@ export class Service<Content extends Resources.Content<any>> {
         }
         path = this.formatUrl(path);
         return _self.$http
-            .post(path, AdhConvert.exportContent(_self.adhMetaApi, obj));
+            .post(path, obj);
     }
 
     public post(path : string, obj : Content) : ng.IPromise<Content> {
