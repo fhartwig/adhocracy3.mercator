@@ -79,8 +79,9 @@ export var register = (angular, config, meta_api) => {
                     ));
                 };
                 factory.$inject = ["$q", "$http", "$rootScope", "$window"];
-                adhUser.userPath = "/principals/users/0000000/";
-                return angular.injector(["ng"]).invoke(factory);
+                var v = angular.injector(["ng"]).invoke(factory);
+                v.userPath = "/principals/users/0000000/";
+                return v;
             })();
 
             var poolPath = "/adhocracy";
