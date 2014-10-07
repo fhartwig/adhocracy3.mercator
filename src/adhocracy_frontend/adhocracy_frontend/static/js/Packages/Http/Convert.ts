@@ -16,7 +16,7 @@ var sanityCheck = (obj : Resources.Content<any>) : void => {
     }
 
     if (!Resources_.resourceRegistry.hasOwnProperty(obj.content_type)) {
-        throw ("unknown content_typef: " + obj.content_type + "\nin object:\n" + JSON.stringify(obj, null, 2));
+        throw ("unknown content_type: " + obj.content_type + "\nin object:\n" + JSON.stringify(obj, null, 2));
     }
 };
 
