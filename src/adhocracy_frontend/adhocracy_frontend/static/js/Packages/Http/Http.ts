@@ -118,7 +118,7 @@ export class Service<Content extends Resources.Content<any>> {
     }
 
     public put(path : string, obj : Content) : ng.IPromise<Content> {
-        return this.putRaw(path, obj)
+        return this.putRaw(path, AdhConvert.exportContent(this.adhMetaApi, obj))
             .then(
                 (response) => AdhConvert.importContent(<any>response, this.adhMetaApi, this.adhPreliminaryNames),
                 AdhError.logBackendError);
@@ -138,7 +138,7 @@ export class Service<Content extends Resources.Content<any>> {
     public post(path : string, obj : Content) : ng.IPromise<Content> {
         var _self = this;
 
-        return _self.postRaw(path, obj)
+        return _self.postRaw(path, AdhConvert.exportContent(_self.adhMetaApi, obj))
             .then(
                 (response) => AdhConvert.importContent(<any>response, _self.adhMetaApi, _self.adhPreliminaryNames),
                 AdhError.logBackendError);
