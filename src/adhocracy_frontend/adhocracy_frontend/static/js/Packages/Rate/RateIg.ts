@@ -79,10 +79,10 @@ export var register = (angular, config, meta_api) => {
                     ));
                 };
                 factory.$inject = ["$q", "$http", "$rootScope", "$window"];
-                var v = angular.injector(["ng"]).invoke(factory);
-                v.userPath = "/principals/users/0000000/";
-                return v;
+                return angular.injector(["ng"]).invoke(factory);
             })();
+
+            adhUser.userPath = "/principals/users/0000000/";
 
             var poolPath = "/adhocracy";
             var proposalName = "Against_Curtains_" + Math.random();
