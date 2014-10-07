@@ -103,6 +103,7 @@ export class Transaction {
             if (request.hasOwnProperty("body")) {
                 request.body = AdhConvert.exportContent(this.adhMetaApi, request.body);
             }
+            return request;
         };
 
         return this.adhHttp.postRaw("/batch", this.requests.map(conv)).then(
