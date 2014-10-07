@@ -53,7 +53,7 @@ export var register = (angular, config, meta_api) => {
             adhHttp = (() => {
                 var factory = ($http, $q, $timeout) => {
                     $http.defaults.headers.common["X-User-Token"] = "SECRET_GOD";
-                    $http.defaults.headers.common["X-User-Path"] = "/principals/users/0000000";
+                    $http.defaults.headers.common["X-User-Path"] = "/principals/users/0000000/";
 
                     return (new AdhHttp.Service($http, $q, $timeout, adhMetaApi, adhPreliminaryNames, config));
                 };
@@ -79,6 +79,7 @@ export var register = (angular, config, meta_api) => {
                     ));
                 };
                 factory.$inject = ["$q", "$http", "$rootScope", "$window"];
+                adhUser.userPath = "/principals/users/0000000/";
                 return angular.injector(["ng"]).invoke(factory);
             })();
 
@@ -169,6 +170,10 @@ export var register = (angular, config, meta_api) => {
             });
 
             it("logs in god", () => {
+                // (this is not really a test, because adhUser is not
+                // really a service.  it's all mocked.  it's still
+                // good to know that userPath is where it is needed.
+                // :-)
                 expect(adhUser.userPath).toContain("/principals/users/0000000/");
             });
 
