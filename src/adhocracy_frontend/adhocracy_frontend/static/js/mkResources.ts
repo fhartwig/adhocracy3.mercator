@@ -141,6 +141,8 @@ var mkImportStatement : (modulePath : string, relativeRoot : string, metaApi : M
 var mkNick : (modulePath : string, metaApi : MetaApi.IMetaApi) => string;
 var mkFieldType : (field : MetaApi.ISheetField) => FieldType;
 var mkFlags : (field : MetaApi.ISheetField, comment ?: boolean) => string;
+var isReadableField : (field : MetaApi.ISheetField) => boolean;
+var isWriteableField : (field : MetaApi.ISheetField) => boolean;
 
 var mkdirForFile : (file : string) => void;
 var pyModuleToTsModule : (module : string) => string;
@@ -310,9 +312,6 @@ renderSheet = (modulePath : string, sheet : MetaApi.ISheet, modules : MetaApi.IM
     var sheetI : string = "";
     var hasSheetI : string = "";
 
-    var writables : MetaApi.ISheetField[] = [];
-    var nonWritables : MetaApi.ISheetField[] = [];
-
     var sheetMetaApi : Base.ISheetMetaApi = {
         readable: [],
         editable: [],
@@ -321,55 +320,32 @@ renderSheet = (modulePath : string, sheet : MetaApi.ISheet, modules : MetaApi.IM
         references: []
     };
 
-    (() => {
-        for (var x in sheet.fields) {
-            if (sheet.fields.hasOwnProperty(x)) {
-                var field = sheet.fields[x];
-
-                if (field.editable || field.creatable || field.create_mandatory) {
-                    writables.push(field);
-
-                    if (field.valuetype === "adhocracy_core.schema.AbsolutePath") {
-                        sheetMetaApi.references.push(field.name);
-                    }
-                } else {
-                    nonWritables.push(field);
-                }
-
-                if (field.readable) {
-                    sheetMetaApi.readable.push(field.name);
-                }
-                if (field.editable) {
-                    sheetMetaApi.editable.push(field.name);
-                }
-                if (field.creatable) {
-                    sheetMetaApi.creatable.push(field.name);
-                }
-                if (field.create_mandatory) {
-                    sheetMetaApi.create_mandatory.push(field.name);
-                }
-            }
-        }
-    })();
-
     var mkConstructor = () => {
         var args : string[] = [];
         var lines : string[] = [];
 
-        if (writables.length > 0) {
+        if (sheet.fields.length > 0) {
             args.push("args : {");
-            args.push(mkFieldSignaturesSheetCons(writables, "        ", ";\n") + ";");
+            args.push(mkFieldSignaturesSheetCons(sheet.fields, "        ", ";\n") + ";");
             args.push("    }");
 
-            for (var x in writables) {
-                if (writables.hasOwnProperty(x)) {
-                    var fieldName : string = writables[x].name;
-                    var fieldParser : string = mkFieldType(writables[x]).parser;
+            for (var x in sheet.fields) {
+                if (sheet.fields.hasOwnProperty(x)) {
+                    var codeLine : string;
+                    var fieldName : string = sheet.fields[x].name;
+                    var fieldParser : string = mkFieldType(sheet.fields[x]).parser;
+
                     if (fieldParser) {
-                        lines.push("        this." + fieldName + " = (" + fieldParser + ")(args." + fieldName + ");");
+                        codeLine = "this." + fieldName + " = (" + fieldParser + ")(args." + fieldName + ");";
                     } else {
-                        lines.push("        this." + fieldName + " = args." + fieldName + ";");
+                        codeLine = "this." + fieldName + " = args." + fieldName + ";";
                     }
+
+                    if (!isWriteableField(sheet.fields[x])) {
+                        codeLine = "if (args.hasOwnProperty(\"" + fieldName + "\")) { " + codeLine + "}";
+                    }
+
+                    lines.push("        " + codeLine);
                 }
             }
         }
@@ -428,7 +404,7 @@ mkFieldSignatures = (fields : MetaApi.ISheetField[], tab : string, separator : s
 mkFieldSignaturesSheetCons = (fields : MetaApi.ISheetField[], tab : string, separator : string) : string =>
     UtilR.mkThingList(
         fields,
-        (field) => field.name + " : " + mkFieldType(field).constructorType,
+        (field) => field.name + (isWriteableField(field) ? "" : "?") + " : " + mkFieldType(field).constructorType,
         tab, separator
     );
 
@@ -830,6 +806,10 @@ mkFlags = (field : MetaApi.ISheetField, comment ?: boolean) : string => {
 
     return result;
 };
+
+isReadableField = (field) => field.readable;
+
+isWriteableField = (field) => field.editable || field.creatable || field.create_mandatory;
 
 
 
