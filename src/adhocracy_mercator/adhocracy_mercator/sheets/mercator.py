@@ -212,7 +212,7 @@ class OrganizationInfoSchema(colander.MappingSchema):
     # FIXME status_other must be non-empty if status=other, otherwise it must
     # be empty or null
     website = URL()
-    planned_date = DateTime()
+    planned_date = DateTime(missing=colander.drop, default=None)
     help_request = Text(validator=colander.Length(max=500))
 
     def validator(self, node, value):
