@@ -60,15 +60,15 @@ export interface IScopeData {
     user_info : {
         first_name : string;
         last_name : string;
-        country : string;
-        createtime : string;
+        country : number;
+        createtime : Date;
     };
     organization_info : {
         status_enum : string;  // (allowed values: 'registered_nonprofit', 'planned_nonprofit', 'support_needed', 'other')
         name : string;
-        country : string;
+        country : number;
         website : string;
-        date_of_foreseen_registration : string;
+        date_of_foreseen_registration : Date;
         how_can_we_help_you : string;
         status_other : string;
     };
