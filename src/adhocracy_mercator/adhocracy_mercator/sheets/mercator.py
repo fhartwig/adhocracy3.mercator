@@ -222,7 +222,7 @@ class OrganizationInfoSchema(colander.MappingSchema):
             if not value.get('status_other', None):
                 status_other = node['status_other']
                 raise colander.Invalid(status_other,
-                                       msg='Required iff status == other')
+                                       msg='Required if status == other')
         else:
             # FIXME: Allow multiple errors at the same time
             name = node['name']
