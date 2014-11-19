@@ -55,75 +55,74 @@ import SIVersionable = require("../../Resources_/adhocracy_core/sheets/versions/
 var pkgLocation = "/MercatorProposal";
 
 
+export interface IScopeData {
+    // 1. basic
+    user_info : {
+        first_name : string;
+        last_name : string;
+        country : string;
+        createtime : string;
+    };
+    organization_info : {
+        status_enum : string;  // (allowed values: 'registered_nonprofit', 'planned_nonprofit', 'support_needed', 'other')
+        name : string;
+        country : string;
+        website : string;
+        date_of_foreseen_registration : string;
+        how_can_we_help_you : string;
+        status_other : string;
+    };
+
+    // 2. introduction
+    introduction : {
+        title : string;
+        teaser : string;
+        imageUpload : Flow;
+    };
+
+    // 3. in detail
+    details : {
+        description : string;
+        location_is_specific : boolean;
+        location_specific_1 : string;
+        location_specific_2 : string;
+        location_specific_3 : string;
+        location_is_online : boolean;
+        location_is_linked_to_ruhr : boolean;
+    };
+    story : string;
+
+    // 4. motivation
+    outcome : string;
+    steps : string;
+    value : string;
+    partners : string;
+
+    // 5. financial planning
+    finance : {
+        budget : number;
+        requested_funding : number;
+        other_sources : string;
+        granted : boolean;
+    };
+
+    // 6. extra
+    experience : string;
+    heard_from : {
+        colleague : boolean;
+        website : boolean;
+        newsletter : boolean;
+        facebook : boolean;
+        other : boolean;
+        other_specify : string
+    };
+    accept_disclaimer : string;
+}
+
 export interface IScope extends AdhResourceWidgets.IResourceWidgetScope {
     poolPath : string;
     mercatorProposalForm? : any;
-    data : {
-        // 1. basic
-        user_info : {
-            first_name : string;
-            last_name : string;
-            country : string;
-            createtime : string;
-        };
-        organization_info : {
-            status_enum : string;  // (allowed values: 'registered_nonprofit', 'planned_nonprofit', 'support_needed', 'other')
-            name : string;
-            country : string;
-            website : string;
-            date_of_foreseen_registration : string;
-            how_can_we_help_you : string;
-            status_other : string;
-        };
-
-        // 2. introduction
-        introduction : {
-            title : string;
-            teaser : string;
-            imageUpload : Flow;
-        };
-
-        // 3. in detail
-        details : {
-            description : string;
-            location_is_specific : boolean;
-            location_specific_1 : string;
-            location_specific_2 : string;
-            location_specific_3 : string;
-            location_is_online : boolean;
-            location_is_linked_to_ruhr : boolean;
-        };
-        story : string;
-
-        // 4. motivation
-        outcome : string;
-        steps : string;
-        value : string;
-        partners : string;
-
-        // 5. financial planning
-        finance : {
-            budget : number;
-            requested_funding : number;
-            other_sources : string;
-            granted : boolean;
-        };
-
-        // 6. extra
-        experience : string;
-        heard_from : {
-            colleague : boolean;
-            website : boolean;
-            newsletter : boolean;
-            facebook : boolean;
-            other : boolean;
-            other_specify : string
-        };
-
-        accept_disclaimer : string;
-
-        image : any;
-    };
+    data : IScopeData;
 }
 
 export interface IControllerScope extends IScope {
@@ -189,9 +188,9 @@ export class Widget<R extends ResourcesBase.Resource> extends AdhResourceWidgets
         return this.$q.when();
     }
 
-    private initializeScope(scope) {
+    private initializeScope(scope : IScope) : IScopeData {
         if (!scope.hasOwnProperty("data")) {
-            scope.data = {};
+            scope.data = <any>{};
         }
 
         var data = scope.data;
