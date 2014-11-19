@@ -66,9 +66,9 @@ export interface IScopeData {
     organization_info : {
         status_enum : string;  // (allowed values: 'registered_nonprofit', 'planned_nonprofit', 'support_needed', 'other')
         name : string;
-        country : string;
+        country : number;
         website : string;
-        date_of_foreseen_registration : string;
+        date_of_foreseen_registration : Date;
         how_can_we_help_you : string;
         status_other : string;
     };
