@@ -175,10 +175,6 @@ export var register = (angular, config, meta_api) => {
                                 });
                             });
                         })
-                        .catch((error) : void => {
-                            console.log(error);
-                            done();
-                        });
                 };
 
             adhHttp.withTransaction(cb)
