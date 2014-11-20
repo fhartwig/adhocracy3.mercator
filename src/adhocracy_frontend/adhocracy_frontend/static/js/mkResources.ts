@@ -320,6 +320,30 @@ renderSheet = (modulePath : string, sheet : MetaApi.ISheet, modules : MetaApi.IM
         references: []
     };
 
+    (() => {
+        for (var x in sheet.fields) {
+            if (sheet.fields.hasOwnProperty(x)) {
+                var field = sheet.fields[x];
+
+                if (field.readable) {
+                    sheetMetaApi.readable.push(field.name);
+                }
+                if (field.editable) {
+                    sheetMetaApi.editable.push(field.name);
+                }
+                if (field.creatable) {
+                    sheetMetaApi.creatable.push(field.name);
+                }
+                if (field.create_mandatory) {
+                    sheetMetaApi.create_mandatory.push(field.name);
+                }
+                if (field.valuetype === "adhocracy_core.schema.AbsolutePath") {
+                    sheetMetaApi.references.push(field.name);
+                }
+            }
+        }
+    })();
+
     var mkConstructor = () => {
         var args : string[] = [];
         var lines : string[] = [];
