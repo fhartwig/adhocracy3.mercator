@@ -42,7 +42,7 @@ export var register = (angular, config, meta_api) => {
         var _commentVersion : RICommentVersion;
         var _rateVersion : RIRateVersion;
 
-        beforeEach((done) => {
+        beforeEach(() => {
             adhMetaApi = angular.injector(["ng"]).invoke(() => new AdhMetaApi.MetaApiQuery(meta_api));
             adhPreliminaryNames = angular.injector(["ng"]).invoke(() => new AdhPreliminaryNames.Service());
 
@@ -83,7 +83,10 @@ export var register = (angular, config, meta_api) => {
             })();
 
             adhUser.userPath = "/principals/users/0000000/";
+        });
 
+        describe("posting rates", () => {
+            it("works", (done) => {
             var poolPath = "/adhocracy";
             var proposalName = "Against_Curtains_" + Math.random();
                 // (we don't have a way yet to repeat this test
