@@ -258,10 +258,15 @@ export var register = (angular, config, meta_api) => {
                 adhHttp.get(ratePostPoolPath, query)
                     .then(
                         (poolRsp) => {
-                            var rspCounts = poolRsp.data[SIPool.nick].aggregateby;
-                            expect(rspCounts.hasOwnProperty(aggrkey)).toBe(true);
-                            expect(rspCounts[aggrkey]).toEqual({"1": 1});  // 0-counts are omitted
-                            done();
+                            try {
+                                var rspCounts = poolRsp.data[SIPool.nick].aggregateby;
+                                expect(rspCounts.hasOwnProperty(aggrkey)).toBe(true);
+                                expect(rspCounts[aggrkey]).toEqual({"1": 1});  // 0-counts are omitted
+                                done();
+                            } catch (e) {
+                                expect(e).toBe(false);
+                                done();
+                            }
                         },
                         (msg) => {
                             expect(msg).toBe(false);
