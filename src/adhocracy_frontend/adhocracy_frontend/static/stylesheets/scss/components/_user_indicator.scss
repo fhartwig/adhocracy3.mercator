@@ -22,8 +22,9 @@ Currently, they are adjusted to 0.5em padding on all sides.
 */
 
 .user-indicator {
-    display: inline-block;
+    @include inline-block;
     font-size: $font-size-small;
+    font-weight: 300;
     vertical-align: bottom;
     white-space: nowrap;
 }
