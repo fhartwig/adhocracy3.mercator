@@ -93,6 +93,7 @@ export interface IScopeData {
     introduction : {
         title : string;
         teaser : string;
+        picture : string;
         commentCount : number;
         nickInstance : number;
     };
@@ -387,6 +388,7 @@ export class Widget<R extends ResourcesBase.Resource> extends AdhResourceWidgets
 
                         scope.title = res.title;
                         scope.teaser = res.teaser;
+                        scope.picture = res.picture;
                         scope.commentCount = subResource.data[SICommentable.nick].comments.length;
                         this.countComments(subResource).then((c) => { scope.commentCount = c; data.commentCountTotal += c; });
                     })();
@@ -493,7 +495,7 @@ export class Widget<R extends ResourcesBase.Resource> extends AdhResourceWidgets
                 resource.data[SIMercatorIntroduction.nick] = new SIMercatorIntroduction.Sheet({
                     title: data.introduction.title,
                     teaser: data.introduction.teaser,
-                    picture: undefined
+                    picture: data.introduction.picture
                 });
                 break;
             case RIMercatorDescriptionVersion.content_type:
@@ -656,6 +658,11 @@ export class Widget<R extends ResourcesBase.Resource> extends AdhResourceWidgets
     public _edit(instance : AdhResourceWidgets.IResourceWidgetInstance<R, IScope>, old : R) : ng.IPromise<R[]> {
         var self : Widget<R> = this;
         var data = this.initializeScope(instance.scope);
+
+        // FIXME: if the user changes the image in edit mode, the new
+        // image will not be uploaded, but the old path will remain in
+        // place.  before this can be implemented and tested, #386,
+        // #368, #324 need to be fixed.
 
         var mercatorProposalVersion = AdhResourceUtil.derive(old, {preliminaryNames : this.adhPreliminaryNames});
         mercatorProposalVersion.parent = AdhUtil.parentPath(old.path);
