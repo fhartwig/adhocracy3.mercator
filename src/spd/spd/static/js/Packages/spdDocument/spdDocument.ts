@@ -180,7 +180,7 @@ var postEdit = (
         } else {
             var oldParagraphVersion = oldParagraphVersions[index];
 
-            if (paragraph.body !== oldParagraphVersion[SIParagraph.nick].text) {
+            if (paragraph.body !== oldParagraphVersion.data[SIParagraph.nick].text) {
                 paragraphVersion = new RIParagraphVersion({preliminaryNames: adhPreliminaryNames});
                 paragraphVersion.parent = AdhUtil.parentPath(oldParagraphVersion.path);
                 paragraphVersion.data[SIVersionable.nick] = new SIVersionable.Sheet({
