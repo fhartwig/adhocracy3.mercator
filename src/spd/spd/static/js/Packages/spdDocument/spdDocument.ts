@@ -243,11 +243,9 @@ export var detailDirective = (
 };
 
 export var listItemDirective = (
+    $q : angular.IQService,
     adhConfig : AdhConfig.IService,
-    adhHttp : AdhHttp.Service<any>,
-    adhPermissions : AdhPermissions.Service,
-    adhRate : AdhRate.Service,
-    adhTopLevelState : AdhTopLevelState.Service
+    adhHttp : AdhHttp.Service<any>
 ) => {
     return {
         restrict: "E",
@@ -256,10 +254,7 @@ export var listItemDirective = (
             path: "@"
         },
         link: (scope : IScope) => {
-            scope.data = {
-                title: "",
-                commentCountTotal: 3
-            };
+            bindPath($q, adhHttp)(scope);
         }
     };
 };
@@ -410,5 +405,5 @@ export var register = (angular) => {
             editDirective])
         .directive("adhSpdListing", ["adhConfig", listingDirective])
         .directive("adhSpdDocumentListItem", [
-            "adhConfig", "adhHttp", "adhPermissions", "adhRate", "adhTopLevelState", listItemDirective]);
+            "$q", "adhConfig", "adhHttp", listItemDirective]);
 };
