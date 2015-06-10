@@ -245,7 +245,8 @@ export var detailDirective = (
 export var listItemDirective = (
     $q : angular.IQService,
     adhConfig : AdhConfig.IService,
-    adhHttp : AdhHttp.Service<any>
+    adhHttp : AdhHttp.Service<any>,
+    adhTopLevelState : AdhTopLevelState.Service
 ) => {
     return {
         restrict: "E",
@@ -255,6 +256,16 @@ export var listItemDirective = (
         },
         link: (scope : IScope) => {
             bindPath($q, adhHttp)(scope);
+
+            scope.$on("$destroy", adhTopLevelState.on("documentUrl", (documentVersionUrl) => {
+                if (!documentVersionUrl) {
+                    scope.selectedState = "";
+                } else if (documentVersionUrl === scope.path) {
+                    scope.selectedState = "is-selected";
+                } else {
+                    scope.selectedState = "is-not-selected";
+                }
+            }));
         }
     };
 };
@@ -405,5 +416,5 @@ export var register = (angular) => {
             editDirective])
         .directive("adhSpdListing", ["adhConfig", listingDirective])
         .directive("adhSpdDocumentListItem", [
-            "$q", "adhConfig", "adhHttp", listItemDirective]);
+            "$q", "adhConfig", "adhHttp", "adhTopLevelState", listItemDirective]);
 };
